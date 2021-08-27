@@ -11,16 +11,28 @@ const rollDice = document.querySelector('.btn--roll')
 const hold = document.querySelector('.btn--hold')
 const newGame = document.querySelector('.btn--new')
 
-let score = [0,0]
+let score, currentScore, activePlayer = 0, playing
 
-let currentScore = 0
-let activePlayer = 0
-let playing = true
+const init = function(){
+	score0El.textContent = 0
+	score1El.textContent = 0
+	current0El.textContent = 0
+	current1El.textContent = 0
 
-//initial status
-score0El.textContent = 0
-score1El.textContent = 0
-diceEl.classList.add('hidden')
+	currentScore = 0
+	activePlayer = 0
+	playing = true
+	score = [0,0]
+	diceEl.classList.add('hidden')
+
+	player0El.classList.remove('player--winner')
+	player1El.classList.remove('player--winner')
+	player1El.classList.remove('player--active')
+	player0El.classList.add('player--active')
+}
+
+//start game
+init()
 
 //switch player
 const switchPlayer = function(){
@@ -62,7 +74,7 @@ hold.addEventListener('click', function(){
 		document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer]
 		
 		//check if active player wins
-		if(score[activePlayer] >= 20){
+		if(score[activePlayer] >= 100){
 			playing = false
 			diceEl.classList.add('hidden')
 			document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
@@ -74,18 +86,5 @@ hold.addEventListener('click', function(){
 })
 
 newGame.addEventListener('click', function(){
-	score0El.textContent = 0
-	score1El.textContent = 0
-	current0El.textContent = 0
-	current1El.textContent = 0
-
-	currentScore = 0
-	activePlayer = 0
-	playing = true
-	score = [0,0]
-	diceEl.classList.add('hidden')
-
-	player0El.classList.remove('player--winner')
-	player1El.classList.remove('player--winner')
-	player0El.classList.add('player--active')
+	init()
 })
