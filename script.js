@@ -21,6 +21,20 @@ score0El.textContent = 0
 score1El.textContent = 0
 diceEl.classList.add('hidden')
 
+//switch player
+const switchPlayer = function(){
+	//reset current score to 0
+	currentScore = 0
+	document.getElementById(`current--${activePlayer}`).textContent = 0
+
+	//switch to next player
+	activePlayer = activePlayer === 0 ? 1 : 0
+
+	//switch background color of active player
+	player0El.classList.toggle('player--active')
+	player1El.classList.toggle('player--active')
+}
+
 rollDice.addEventListener('click', function(){
     const dice = Math.trunc(Math.random()*6) +1
     diceEl.classList.remove('hidden')
@@ -31,15 +45,21 @@ rollDice.addEventListener('click', function(){
        currentScore += dice
 			 document.getElementById(`current--${activePlayer}`).textContent = currentScore
     } else {
-				currentScore = 0
-				document.getElementById(`current--${activePlayer}`).textContent = currentScore
-        
-				//switch to next player
-				activePlayer = activePlayer === 0 ? 1 : 0
-
-				//switch background color of active player
-				player0El.classList.toggle('player--active')
-				player1El.classList.toggle('player--active')
-
+				switchPlayer()
     }
+})
+
+hold.addEventListener('click', function(){
+	//add current score to active player score
+	score[activePlayer] += currentScore
+
+	//display active player score on hold
+	document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer]
+	
+	//check if active player wins
+	if(score[activePlayer] >= 100){
+		alert(`Player ${activePlayer + 1} wins!!`)
+	}
+	
+	switchPlayer()
 })
