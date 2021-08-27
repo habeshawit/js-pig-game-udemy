@@ -8,10 +8,10 @@ const player0El = document.querySelector('.player--0')
 const player1El = document.querySelector('.player--1')
 const diceEl = document.querySelector('.dice')
 const rollDice = document.querySelector('.btn--roll')
-const newRoll = document.querySelector('.btn--new')
 const hold = document.querySelector('.btn--hold')
+const newGame = document.querySelector('.btn--new')
 
-const score = [0,0]
+let score = [0,0]
 
 let currentScore = 0
 let activePlayer = 0
@@ -71,4 +71,20 @@ hold.addEventListener('click', function(){
 			switchPlayer()
 		}
 	}
+})
+
+newGame.addEventListener('click', function(){
+	score0El.textContent = 0
+	score1El.textContent = 0
+	current0El.textContent = 0
+	current1El.textContent = 0
+
+	currentScore = 0
+	activePlayer = 0
+	playing = true
+	score = [0,0]
+	diceEl.classList.add('hidden')
+
+	document.querySelector(`.player--${activePlayer}`).classList.remove('player--winner')
+			document.querySelector(`.player--${activePlayer}`).classList.add('player--active')
 })
