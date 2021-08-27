@@ -15,6 +15,7 @@ const score = [0,0]
 
 let currentScore = 0
 let activePlayer = 0
+let playing = true
 
 //initial status
 score0El.textContent = 0
@@ -36,7 +37,8 @@ const switchPlayer = function(){
 }
 
 rollDice.addEventListener('click', function(){
-    const dice = Math.trunc(Math.random()*6) +1
+	if(playing){
+		const dice = Math.trunc(Math.random()*6) +1
     diceEl.classList.remove('hidden')
     diceEl.src = `dice-${dice}.png`
 
@@ -47,20 +49,25 @@ rollDice.addEventListener('click', function(){
     } else {
 				switchPlayer()
     }
+	}
+    
 })
 
 hold.addEventListener('click', function(){
-	//add current score to active player score
-	score[activePlayer] += currentScore
+	if(playing){
+				//add current score to active player score
+		score[activePlayer] += currentScore
 
-	//display active player score on hold
-	document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer]
-	
-	//check if active player wins
-	if(score[activePlayer] >= 20){
-		document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
-		document.querySelector(`.player--${activePlayer}`).classList.remove('player--active')
-	} else {
-		switchPlayer()
+		//display active player score on hold
+		document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer]
+		
+		//check if active player wins
+		if(score[activePlayer] >= 20){
+			playing = false
+			document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
+			document.querySelector(`.player--${activePlayer}`).classList.remove('player--active')
+		} else {
+			switchPlayer()
+		}
 	}
 })
