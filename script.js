@@ -13,5 +13,9 @@ score1El.textContent = 0
 diceEl.classList.add('hidden')
 
 rollDice.addEventListener('click', function(){
+    const dice = Math.trunc(Math.random()*6) +1
+
     diceEl.classList.remove('hidden')
+    diceEl.src = `dice-${dice}.png`
+
 })
