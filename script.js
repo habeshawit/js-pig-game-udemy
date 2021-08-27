@@ -2,8 +2,10 @@
 
 const score0El = document.getElementById('score--0')
 const score1El = document.getElementById('score--1')
-const Current0El = document.getElementById('current--0')
-const Current1El = document.getElementById('current--1')
+const current0El = document.getElementById('current--0')
+const current1El = document.getElementById('current--1')
+const player0El = document.getElementById('player--0')
+const player1El = document.getElementById('player--1')
 const diceEl = document.querySelector('.dice')
 const rollDice = document.querySelector('.btn--roll')
 const newRoll = document.querySelector('.btn--new')
@@ -34,7 +36,10 @@ rollDice.addEventListener('click', function(){
         
 				//switch to next player
 				activePlayer = activePlayer === 0 ? 1 : 0
-				// currentScore = score[activePlayer]
+
+				//switch background color of active player
+				player0El.classList.toggle('player--active')
+				player1El.classList.toggle('player--active')
 
     }
 })
