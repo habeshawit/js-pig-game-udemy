@@ -64,6 +64,7 @@ hold.addEventListener('click', function(){
 		//check if active player wins
 		if(score[activePlayer] >= 20){
 			playing = false
+			diceEl.classList.add('hidden')
 			document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
 			document.querySelector(`.player--${activePlayer}`).classList.remove('player--active')
 		} else {
