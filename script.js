@@ -57,9 +57,10 @@ hold.addEventListener('click', function(){
 	document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer]
 	
 	//check if active player wins
-	if(score[activePlayer] >= 100){
-		alert(`Player ${activePlayer + 1} wins!!`)
+	if(score[activePlayer] >= 20){
+		document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
+		document.querySelector(`.player--${activePlayer}`).classList.remove('player--active')
+	} else {
+		switchPlayer()
 	}
-	
-	switchPlayer()
 })
